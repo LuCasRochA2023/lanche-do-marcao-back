@@ -2,6 +2,8 @@ package com.example.demo.usuario;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Table(name = "usuario")
 @Entity
@@ -20,12 +22,14 @@ public class Usuario {
     private boolean ativo;
     @Embedded
     private Endereco endereco;
-
     public Usuario(DadosUsuario dadosUsuario) {
         this.nome = dadosUsuario.nome();
         this.email = dadosUsuario.email();
-        this.senha = dadosUsuario.senha();
         this.endereco = new Endereco(dadosUsuario.endereco());
         this.ativo = true;
+    }
+    public Usuario( String email, String senha) {
+        this.senha = senha;
+        this.email = email;
     }
 }
