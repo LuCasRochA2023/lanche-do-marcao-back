@@ -22,6 +22,7 @@ public class Usuario {
     private boolean ativo;
     @Embedded
     private Endereco endereco;
+
     public Usuario(DadosUsuario dadosUsuario) {
         this.nome = dadosUsuario.nome();
         this.email = dadosUsuario.email();
