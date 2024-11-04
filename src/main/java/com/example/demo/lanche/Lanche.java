@@ -25,11 +25,11 @@ public class Lanche {
     private byte[] imagem;
     private boolean ativo;
 
-    public Lanche(String nome, String descricao, Double preco, byte[] imagem, boolean ativo) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.imagem = imagem;
+    public Lanche(DadosLanche lanche) {
+        this.nome = lanche.nome();
+        this.descricao = lanche.descricao();
+        this.preco = lanche.preco();
+        this.imagem = lanche.imagem();
         this.ativo = true;
     }
 

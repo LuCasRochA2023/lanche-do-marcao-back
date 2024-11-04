@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface LancheRepository extends JpaRepository<Lanche, Long> {
     Page<Lanche> findAllByAtivoTrue(Pageable pageable);
 
-
+    Optional<Lanche> findByNome(String nome);
 }
