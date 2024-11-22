@@ -1,0 +1,1 @@
+alter table lanche drop column imagem;

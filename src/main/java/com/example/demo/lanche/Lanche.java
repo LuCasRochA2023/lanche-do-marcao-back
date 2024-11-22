@@ -6,6 +6,7 @@ import jdk.jfr.Label;
 import lombok.*;
 
 import java.awt.image.BufferedImage;
+import java.math.BigDecimal;
 
 @Table(name = "lanche")
 @Entity
@@ -20,16 +21,15 @@ public class Lanche {
     private Long id;
     private String nome;
     private String descricao;
-    private Double preco;
-    @Lob
-    private byte[] imagem;
+    private BigDecimal preco;
+    private Integer quantidade;
     private boolean ativo;
 
     public Lanche(DadosLanche lanche) {
         this.nome = lanche.nome();
         this.descricao = lanche.descricao();
         this.preco = lanche.preco();
-        this.imagem = lanche.imagem();
+        this.quantidade = lanche.quantidade();
         this.ativo = true;
     }
 

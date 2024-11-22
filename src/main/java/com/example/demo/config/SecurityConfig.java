@@ -24,15 +24,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Configura CORS
-                .csrf(csrf -> csrf.disable()) // Desabilita CSRF para desenvolvimento (não recomendado em produção)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> auth
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // Permite acesso ao login
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll() // Permite acesso ao cadastro de usuários
-                        .anyRequest().authenticated()) // Exige autenticação para outros endpoints
-                .exceptionHandling(e -> e // Configura o tratamento de exceções
-                        .authenticationEntryPoint(new Http403ForbiddenEntryPoint())); // Para evitar erro 403
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/lanche").permitAll()
+                        .anyRequest().authenticated())
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         return http.build();
     }
 
@@ -40,9 +41,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:3000"); // Permite a origem do frontend
-        configuration.addAllowedHeader("*"); // Permite todos os cabeçalhos
-        configuration.addAllowedMethod("*"); // Permite todos os métodos (GET, POST, etc.)
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -1,0 +1,2 @@
+ALTER TABLE lanche
+ALTER COLUMN imagem SET DATA TYPE bytea;
